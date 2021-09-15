@@ -1,5 +1,16 @@
 
 //Rock Paper Scissors Game in JavaScript
+//start Game HTML button ->
+function game(){
+
+//for loop to run 5 rounds
+for (let i = 1; i <= 5; i++) {
+roundNum = i;
+console.log("Round: " + roundNum);
+
+
+
+playerInput();
 
 //Generate a random number 1 to 3 stored in let variable ROCK. PAPER, or SCISSORS
 
@@ -27,6 +38,8 @@ if (randomNum == 1) {
 console.log ("Computer's selection: " + computerAnswer);
 return computerAnswer;
 }
+
+
 
 //Compare user prompt const variable to computer const variable 
 // if rock && rock  -> try again
@@ -99,7 +112,7 @@ function playRound(computerSelection, playerSelection) {
 function playerInput() {
 
     const randomNum = randomNumGenerator(1, 4);
-    console.log("------NEW GAME------");
+   
     console.log ("Random number: " + randomNum);
 
     const computerFinalAnswer = computerPlay(randomNum);
@@ -116,20 +129,37 @@ function playerInput() {
 
 
     if (playerInputUpper == "ROCK"){
-        console.log("ROCK true")
+       
         return playRound (computerFinalAnswer, playerInputUpper); 
     }
     else if (playerInputUpper == "PAPER") {
-        console.log("PAPER true")
+       
         return playRound (computerFinalAnswer, playerInputUpper);  
     } else if (playerInputUpper == "SCISSORS") {
-        console.log("SCISSORS true")
+       
         return playRound (computerFinalAnswer, playerInputUpper); 
     }else {
         alert("Invalid answer. Try again.");
     }    
-
-
 } // end if .length conditional to excecute code
-
 } //end playerInput ()
+
+
+
+
+//for loop continued
+
+
+
+
+
+
+
+
+
+
+
+
+
+}// end game for loop
+}//End game()
