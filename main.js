@@ -20,8 +20,7 @@ playerInput();
 if (playerPrompt === null){
     console.log("i: " + i);
     break;
-}
-
+} 
 
 
 //Generate a random number 1 to 3 stored in let variable ROCK. PAPER, or SCISSORS
@@ -40,10 +39,13 @@ let computerAnswer = "";
 
 if (randomNum == 1) {
     computerAnswer = "ROCK";
+    document.getElementById("computerAnswer").innerHTML = computerAnswer;
 } else if (randomNum == 2){
     computerAnswer = "PAPER";
+    document.getElementById("computerAnswer").innerHTML = computerAnswer;
 } else if (randomNum == 3) {
     computerAnswer = "SCISSORS";
+    document.getElementById("computerAnswer").innerHTML = computerAnswer;
 } else {
     console.log("randomNum error");
 }
@@ -82,6 +84,8 @@ function tie () {
 
 //After 5 rounds, counting with "i" from loop, declare winner or tie
 function compareScores(){
+
+
 if (i === 5)
 
     if (computerScore > playerScore){
@@ -91,11 +95,12 @@ if (i === 5)
         alert("Player wins");
         console.log("Player wins");
     } else if (playerScore == computerScore){
-        alert("Tie gane");
+        alert("Tie game");
         console.log("Tie game");
     } else {
         console.log("Error");
     }
+    
 }
 
 //Compare user prompt const variable to computer const variable 
@@ -197,7 +202,7 @@ function playerInput() {
     if (playerPrompt != null) {
 
     playerInputUpper = playerPrompt.toUpperCase();
-
+    document.getElementById("playerAnswer").innerHTML = playerInputUpper;
     console.log("Player's selection: " + playerInputUpper);
     
 
@@ -205,6 +210,7 @@ function playerInput() {
     if (playerInputUpper == "ROCK"){
        
         return playRound (computerFinalAnswer, playerInputUpper); 
+        
     }
     else if (playerInputUpper == "PAPER") {
        
