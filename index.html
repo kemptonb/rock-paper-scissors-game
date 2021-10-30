@@ -1,26 +1,40 @@
 <!doctype html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>My Page Title</title>
   <meta name="Rock Paper Scissors Game" content="Basic Rock paper scissors game in JavaScript">
   <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
-<h3>Rock Paper Scissors Game</h3>
-<p>Press the button below to play:</p>
-<button onclick="game()">Play / New Round</button>
-<button onclick="newGame()">Reset</button>
-<h5>Round</h5>
-  <p id="round"></p>
-<h5>Player Score</h5>
-  <p id="playerScore"></p>
-<h5>Computer Score</h5>
-  <p id="computerScore"></p>
-<h5>Player Answer</h5>
-  <p id ="playerAnswer"></p>
-<h5>Computer Answer</h5>
-  <p id="computerAnswer"></p>
+  <h1>Rock, Paper, Scissors?</h1>
+  <div>
+    <button onclick="rockChoice()">Rock</button>
+    <button onclick="paperChoice()">Paper</button>
+    <button onclick="scissorsChoice()">Scissors</button>
+  </div>
+
+  <div class="inline-children">
+    <h5>Round</h5>
+    <p id="round">0</p>
+    <h5>Player Score</h5>
+    <p id="playerScore">0</p>
+    <h5>Computer Score</h5>
+    <p id="computerScore">0</p>
+  </div>
+  <div class="inline-children">
+    <h5>Player Answer</h5>
+    <p id="playerAnswer">. . .</p>
+    <h5>Computer Answer</h5>
+    <p id="computerAnswer">. . .</p>
+  </div>
+  <div>
+    <button onclick="newGame()">New Game</button>
+  </div>
+  <h1 id="endGame"></h1>
   <script src="main.js"></script>
 </body>
+
 </html>

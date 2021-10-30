@@ -1,164 +1,148 @@
-//global vars
-let roundNum = 0;
+let roundNum = 1;
+document.getElementById("round").innerHTML = roundNum + " / 5";
 let playerScore = 0;
 let computerScore = 0;
 let computerResponse = "";
 let playerResponse = "";
 
-function game() {
+function rockChoice() {
+    newStart();
+    document.getElementById("endGame").innerHTML = "";
+    computerResponse = computerCalc();
+    playerResponse = "ROCK";
+    compareInput(playerResponse, computerResponse);
     refreshData();
-    document.getElementById("round").innerHTML = roundNum;
-    round();
+}
 
-function round() {
+function paperChoice() {
+    newStart();
+    document.getElementById("endGame").innerHTML = "";
+    computerResponse = computerCalc();
+    playerResponse = "PAPER";
+    compareInput(playerResponse, computerResponse);
+    refreshData();
+}
+
+function scissorsChoice() {
+    newStart();
+    document.getElementById("endGame").innerHTML = "";
+    computerResponse = computerCalc();
+    playerResponse = "SCISSORS";
+    compareInput(playerResponse, computerResponse);
+    refreshData();
+}
+
+function compareInput(playerResponse, computerResponse) {
+    switch (true) {
+        case (playerResponse === computerResponse):
+            endGame();
+            break;
+        case (playerResponse === "ROCK" && computerResponse === "PAPER"):
+            computerScore++;
+            endGame();
+            break;
+        case (playerResponse === "PAPER" && computerResponse === "SCISSORS"):
+            computerScore++;
+            endGame();
+            break;
+        case (playerResponse === "SCISSORS" && computerResponse === "ROCK"):
+            computerScore++;
+            endGame();
+            break;
+        case (playerResponse === "ROCK" && computerResponse === "SCISSORS"):
+            playerScore++;
+            endGame();
+            break;
+        case (playerResponse === "PAPER" && computerResponse === "ROCK"):
+            playerScore++;
+            endGame();
+            break;
+        case (playerResponse === "SCISSORS" && computerResponse === "PAPER"):
+            playerScore++;
+            endGame();
+            break;
+    }
+}
+
+function computerCalc() {
+    function getRandomInt(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min) + min);
+    }
     roundNum++;
-    console.log("******Round number: " + roundNum + " ********");
-
-    //computerResponse switch
     let computerResponse = "";
     let randomNum = getRandomInt(1, 4);
 
     switch (randomNum) {
         case 1:
             computerResponse = "ROCK";
-            console.log(computerResponse);
-            break;
+            return computerResponse;
         case 2:
             computerResponse = "PAPER";
-            console.log(computerResponse);
-            break;
+            return computerResponse;
         case 3:
             computerResponse = "SCISSORS";
-            console.log(computerResponse);
-            break;
+            return computerResponse;
     }//end switch computerResponse
-
-    //player response
-    let playerResponse = prompt("Rock, paper, scissors?");
-    if (playerResponse != null && playerResponse != "") {
-        playerResponse = playerResponse.toUpperCase();
-        document.getElementById("computerAnswer").innerHTML = computerResponse;
-        document.getElementById("playerAnswer").innerHTML = playerResponse;
-        switch (playerResponse) {
-            case "ROCK":
-                compareInput(playerResponse, computerResponse);
-                break;
-            case "PAPER":
-                compareInput(playerResponse, computerResponse);
-                break;
-            case "SCISSORS":
-                compareInput(playerResponse, computerResponse);
-                break;
-            default:
-                alert("Invalid answer. Try again");
-                endGame();
-                break;
-        }//end playerResponse switch 
-    } else {
-        alert("Invalid answer. Try again.");
-        endGame();
-    }//end if playerResponse   
-
-
-function compareInput(playerResponse, computerResponse) {
-    switch (true) {
-        case (playerResponse === computerResponse):
-            alert("Tie. Try again.");
-            endGame();
-            break;
-        case (playerResponse === "ROCK" && computerResponse === "PAPER"):
-            alert("You lose round");
-            computerScore++;
-            endGame();
-            break;
-        case (playerResponse === "PAPER" && computerResponse === "SCISSORS"):
-            alert("You lose round");
-            computerScore++;
-            endGame();
-            break;
-        case (playerResponse === "SCISSORS" && computerResponse === "ROCK"):
-            alert("You lose round");
-            computerScore++;
-            endGame();
-            break;
-        case (playerResponse === "ROCK" && computerResponse === "SCISSORS"):
-            alert("You win round");
-            playerScore++;
-            endGame();
-            break;
-        case (playerResponse === "PAPER" && computerResponse === "ROCK"):
-            alert("You win round");
-            playerScore++;
-            endGame();
-            break;
-        case (playerResponse === "SCISSORS" && computerResponse === "PAPER"):
-            alert("You win round");
-            playerScore++;
-            endGame();
-            break;
-        default:
-            alert("Error");
-            break;
-    }
-}
-    function scoreGame() {
-        switch (true) {
-            case (playerScore === computerScore):
-                alert("Tie game.");
-                break;
-            case (playerScore > computerScore):
-                alert("You won game.");
-                break;
-            case (playerScore < computerScore):
-                alert("You lost game.");
-                break;
-        }
-        roundNum = 0;
-        playerScore = 0;
-        computerScore = 0;
-    }
-    
-    function endGame() {
-        if (roundNum === 5) {
-           
-            alert("Game ended");
-            scoreGame();
-        }
-    }
-    refreshData();
-
-
-//random number
-function getRandomInt(min, max) {
-    min = Math.ceil(min);
-    max = Math.floor(max);
-    return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
-}
-
-
-}//end round()
-
-function refreshData() {
-    document.getElementById("round").innerHTML = roundNum;
-    document.getElementById("computerScore").innerHTML = computerScore;
-    document.getElementById("playerScore").innerHTML = playerScore;
-}
-
-}//end game()
-
-
+}//end computerCalc()
 
 function newGame() {
-    roundNum = "";
-    playerScore = "";
-    computerScore = "";
-    playerResponse = "";
-    computerResponse = ""
-    document.getElementById("round").innerHTML = roundNum;
-    document.getElementById("computerAnswer").innerHTML = computerResponse;
-    document.getElementById("playerAnswer").innerHTML = playerResponse;
+    roundNum = 1;
+    playerScore = 0;
+    computerScore = 0;
+    playerResponse = ". . .";
+    computerResponse = ". . ."
+    document.getElementById("endGame").innerHTML = "";
+    refreshData();
+}
+
+function endGame() {
+    if (roundNum === 6) {
+        scoreGame();
+    }
+}
+
+function scoreGame() {
+    switch (true) {
+        case (playerScore === computerScore):
+            endTie();
+            break;
+        case (playerScore > computerScore):
+            endWin();
+            break;
+        case (playerScore < computerScore):
+            endLose();
+            break;
+    }
+
+}
+
+function refreshData() {
+    document.getElementById("round").innerHTML = roundNum + " / 5";
     document.getElementById("computerScore").innerHTML = computerScore;
     document.getElementById("playerScore").innerHTML = playerScore;
-    console.clear();
-    alert("Reset");
+    document.getElementById("computerAnswer").innerHTML = computerResponse;
+    document.getElementById("playerAnswer").innerHTML = playerResponse;
 }
+
+function endWin() {
+    document.getElementById("endGame").innerHTML = "You Win Round!";
+    roundNum = 1;
+}
+
+function endLose() {
+    document.getElementById("endGame").innerHTML = "You Lose Round";
+    roundNum = 1;
+}
+function endTie() {
+    document.getElementById("endGame").innerHTML = "Tie Game";
+    roundNum = 1;
+}
+
+function newStart() {
+    if (roundNum === 1) {
+        newGame();
+    }
+}
+
