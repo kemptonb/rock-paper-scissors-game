@@ -1,20 +1,27 @@
 body {
-    margin: 3em;
     font-family: Helvetica;
+    font-size: 1.3em;
+    margin: 3em; 
 }
 
-body h1, h3, h5, p, button, div {
-    margin: 0.4em;
-    
+p {
+    padding-right: 0.5em;
 }
+
 .inline-children h5, p{
    display: inline-block;
-   margin-right: 1em;
+}
+
+#head {
+    font-weight: bold;
+    padding: 0;
+    margin: 0;
 }
 
 button {
     background-color: transparent;
     border-radius: 0.3em;
-    padding: 0.3em 0.7em 0.3em 0.7em;
+    padding: 0.3em 1em 0.3em 1em; 
+    font-size: 1em; 
 }
 

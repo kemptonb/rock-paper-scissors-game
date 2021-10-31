@@ -1,76 +1,16 @@
-let roundNum = 1;
-document.getElementById("round").innerHTML = roundNum + " / 5";
+//DEFAULT GLOBAL VARS
 let playerScore = 0;
 let computerScore = 0;
 let computerResponse = "";
 let playerResponse = "";
 
-function rockChoice() {
-    newStart();
-    document.getElementById("endGame").innerHTML = "";
-    computerResponse = computerCalc();
-    playerResponse = "ROCK";
-    compareInput(playerResponse, computerResponse);
-    refreshData();
-}
-
-function paperChoice() {
-    newStart();
-    document.getElementById("endGame").innerHTML = "";
-    computerResponse = computerCalc();
-    playerResponse = "PAPER";
-    compareInput(playerResponse, computerResponse);
-    refreshData();
-}
-
-function scissorsChoice() {
-    newStart();
-    document.getElementById("endGame").innerHTML = "";
-    computerResponse = computerCalc();
-    playerResponse = "SCISSORS";
-    compareInput(playerResponse, computerResponse);
-    refreshData();
-}
-
-function compareInput(playerResponse, computerResponse) {
-    switch (true) {
-        case (playerResponse === computerResponse):
-            endGame();
-            break;
-        case (playerResponse === "ROCK" && computerResponse === "PAPER"):
-            computerScore++;
-            endGame();
-            break;
-        case (playerResponse === "PAPER" && computerResponse === "SCISSORS"):
-            computerScore++;
-            endGame();
-            break;
-        case (playerResponse === "SCISSORS" && computerResponse === "ROCK"):
-            computerScore++;
-            endGame();
-            break;
-        case (playerResponse === "ROCK" && computerResponse === "SCISSORS"):
-            playerScore++;
-            endGame();
-            break;
-        case (playerResponse === "PAPER" && computerResponse === "ROCK"):
-            playerScore++;
-            endGame();
-            break;
-        case (playerResponse === "SCISSORS" && computerResponse === "PAPER"):
-            playerScore++;
-            endGame();
-            break;
-    }
-}
-
+//COMPUTER RANDOM SELECTION
 function computerCalc() {
     function getRandomInt(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min) + min);
     }
-    roundNum++;
     let computerResponse = "";
     let randomNum = getRandomInt(1, 4);
 
@@ -87,62 +27,96 @@ function computerCalc() {
     }//end switch computerResponse
 }//end computerCalc()
 
-function newGame() {
-    roundNum = 1;
-    playerScore = 0;
-    computerScore = 0;
-    playerResponse = ". . .";
-    computerResponse = ". . ."
+//PLAYER SELECTION
+function rockChoice() {
+    autoRestart()
+    playerResponse = "ROCK";
+    initialSelection();
+}
+
+function paperChoice() {
+    autoRestart()
+    playerResponse = "PAPER";
+    initialSelection();
+}
+
+function scissorsChoice() {
+    autoRestart()
+    playerResponse = "SCISSORS";
+    initialSelection();
+}
+
+function initialSelection() {
     document.getElementById("endGame").innerHTML = "";
+    computerResponse = computerCalc();
+    compareInput(playerResponse, computerResponse);
     refreshData();
 }
 
-function endGame() {
-    if (roundNum === 6) {
-        scoreGame();
-    }
-}
-
-function scoreGame() {
+//COMPARE VARS AND SCORE GAME
+function compareInput(playerResponse, computerResponse) {
     switch (true) {
-        case (playerScore === computerScore):
-            endTie();
+        case (playerResponse === computerResponse):
             break;
-        case (playerScore > computerScore):
-            endWin();
+        case (playerResponse === "ROCK" && computerResponse === "PAPER"):
+            computerScore++;
             break;
-        case (playerScore < computerScore):
-            endLose();
+        case (playerResponse === "PAPER" && computerResponse === "SCISSORS"):
+            computerScore++;
+            break;
+        case (playerResponse === "SCISSORS" && computerResponse === "ROCK"):
+            computerScore++;
+            break;
+        case (playerResponse === "ROCK" && computerResponse === "SCISSORS"):
+            playerScore++;
+            break;
+        case (playerResponse === "PAPER" && computerResponse === "ROCK"):
+            playerScore++;
+            break;
+        case (playerResponse === "SCISSORS" && computerResponse === "PAPER"):
+            playerScore++;
             break;
     }
+    scoreGame();
 
+    function scoreGame() {
+        if (computerScore === 5 || playerScore === 5) {
+            switch (true) {
+                case (playerScore === computerScore):
+                    document.getElementById("endGame").innerHTML = "TIE";
+                    break;
+                case (playerScore > computerScore):
+                    document.getElementById("endGame").innerHTML = "YOU WIN";
+                    break;
+                case (playerScore < computerScore):
+                    document.getElementById("endGame").innerHTML = "YOU LOSE";
+                    break;
+            }
+        }
+    }
 }
 
+//UPDATE ANSWERS
 function refreshData() {
-    document.getElementById("round").innerHTML = roundNum + " / 5";
     document.getElementById("computerScore").innerHTML = computerScore;
     document.getElementById("playerScore").innerHTML = playerScore;
     document.getElementById("computerAnswer").innerHTML = computerResponse;
     document.getElementById("playerAnswer").innerHTML = playerResponse;
 }
 
-function endWin() {
-    document.getElementById("endGame").innerHTML = "You Win Round!";
-    roundNum = 1;
-}
-
-function endLose() {
-    document.getElementById("endGame").innerHTML = "You Lose Round";
-    roundNum = 1;
-}
-function endTie() {
-    document.getElementById("endGame").innerHTML = "Tie Game";
-    roundNum = 1;
-}
-
-function newStart() {
-    if (roundNum === 1) {
+//AUTO RESET GAME IF COMP/PLAYER SCORE GREATER THAN 5
+function autoRestart() {
+    if (playerScore >= 5 || computerScore >= 5) {
         newGame();
     }
 }
 
+//RESTART GAME
+function newGame() {
+    playerScore = 0;
+    computerScore = 0;
+    playerResponse = ". . .";
+    computerResponse = ". . ."
+    document.getElementById("endGame").innerHTML = "NEW GAME";
+    refreshData();
+}

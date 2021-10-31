@@ -2,14 +2,21 @@
 <html lang="en">
 
 <head>
+
   <meta charset="utf-8">
-  <title>My Page Title</title>
+  <title>Rock, Paper, Scissors</title>
   <meta name="Rock Paper Scissors Game" content="Basic Rock paper scissors game in JavaScript">
   <link rel="stylesheet" href="styles.css">
+
 </head>
 
 <body>
-  <h1>Rock, Paper, Scissors?</h1>
+
+  <div>
+    <h3 id=head>ROCK, PAPER, SCISSORS</h3>
+    <p>First to Five, Wins</p>
+  </div>
+
   <div>
     <button onclick="rockChoice()">Rock</button>
     <button onclick="paperChoice()">Paper</button>
@@ -17,24 +24,35 @@
   </div>
 
   <div class="inline-children">
-    <h5>Round</h5>
-    <p id="round">0</p>
-    <h5>Player Score</h5>
-    <p id="playerScore">0</p>
-    <h5>Computer Score</h5>
-    <p id="computerScore">0</p>
+    <p>Player Score:</p>
+    <strong>
+      <p id="playerScore">0</p>
+    </strong>
+    <p>Computer Score:</p>
+    <strong>
+      <p id="computerScore">0</p>
+    </strong>
   </div>
+
   <div class="inline-children">
-    <h5>Player Answer</h5>
-    <p id="playerAnswer">. . .</p>
-    <h5>Computer Answer</h5>
-    <p id="computerAnswer">. . .</p>
+    <p>Player Answer:</p>
+    <strong>
+      <p id="playerAnswer">. . .</p>
+    </strong>
+    <p>Computer Answer:</p>
+    <strong>
+      <p id="computerAnswer">. . .</p>
+    </strong>
   </div>
+
   <div>
     <button onclick="newGame()">New Game</button>
   </div>
-  <h1 id="endGame"></h1>
+
+  <h3 id="endGame"></h3>
+
   <script src="main.js"></script>
+
 </body>
 
 </html>
